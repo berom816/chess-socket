@@ -26,3 +26,8 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.board-square{
+  width:30px;
+  height: 30px;
+}
