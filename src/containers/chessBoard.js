@@ -10,9 +10,13 @@ class ChessBoard extends Component{
 
   render(){
     return(
-      notationsKey.forEach((element)=>{
-        return <BoardSquare color={this.props.chessBoard[element].color}/>
-      })
+      <div className='chess-board'>
+        {
+            notationsKey.map((element)=>{
+              return <BoardSquare color={this.props.chessBoard[element].color} notation={this.props.chessBoard[element]['notation']}/>
+            })
+        }
+      </div>
     )
   }
 }

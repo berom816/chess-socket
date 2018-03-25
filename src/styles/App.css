@@ -27,7 +27,20 @@
   to { transform: rotate(360deg); }
 }
 
+.chess-board{
+  display: flex;
+  flex-wrap: wrap-reverse;
+  border:1px solid red;
+  width:240px;
+  height:240px;
+}
+
 .board-square{
-  width:30px;
+  width: 30px;
   height: 30px;
+  box-sizing: border-box;
+}
+
+.dark{
+  background-color: gray;
 }
