@@ -13,7 +13,11 @@ class ChessBoard extends Component{
       <div className='chess-board'>
         {
             notationsKey.map((element)=>{
-              return <BoardSquare color={this.props.chessBoard[element].color} notation={this.props.chessBoard[element]['notation']}/>
+              return (
+                <BoardSquare color={this.props.chessBoard[element].color} notation={this.props.chessBoard[element]['notation']}>
+
+                </BoardSquare>
+              )
             })
         }
       </div>
