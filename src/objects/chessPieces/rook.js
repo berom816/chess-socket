@@ -13,30 +13,6 @@ export default class Rook extends ChessPiece{
     file = splitNotation[0];
     rank = parseInt(splitNotation[1]);
 
-    // //check north moves
-    // for(let a = rank; a<=8; a++){
-    //   if(!chessBoardState[file+(a.toString())].occupied){
-    //     if(chessBoardState[file+(a.toString())].pieceOnSquare.pieceColor !== this.pieceColor){
-    //       accessiblePositions.push(chessBoardState[file+(a.toString())].position);
-    //     }
-    //     break();
-    //   }else{
-    //     accessiblePositions.push(chessBoardState[file+(a.toString())].position);
-    //   }
-    // }
-    //
-    // //check north moves
-    // for(let a = rank; a>=1; a--){
-    //   if(!chessBoardState[file+(a.toString())].occupied){
-    //     if(chessBoardState[file+(a.toString())].pieceOnSquare.pieceColor !== this.pieceColor){
-    //       accessiblePositions.push(chessBoardState[file+(a.toString())].position);
-    //     }
-    //     break();
-    //   }else{
-    //     accessiblePositions.push(chessBoardState[file+(a.toString())].position);
-    //   }
-    // }
-
     for(let a = 0; a <Math.max(rank, (8-rank)); a++){//rook's file moves and rank moves are same amount on either side
       if(rank + a <= 8){
         if(!chessBoardState[file+((rank+a).toString())].occupied){
@@ -80,5 +56,7 @@ export default class Rook extends ChessPiece{
         }
       }
     }
+
+    return accessiblePositions;
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {chessBoard} from './reducers/reducer_chess_board';
+import Rook from './objects/chessPieces/rook';
 
 it('chess board starting position okay', () => {
   expect(chessBoard.a1.pieceOnSquare.pieceName).toEqual('rook');
@@ -40,3 +41,10 @@ it('chess board starting position okay', () => {
   expect(chessBoard.g7.pieceOnSquare.pieceName).toEqual('pawn');
   expect(chessBoard.h7.pieceOnSquare.pieceName).toEqual('pawn');
 });
+
+it('rook move test', ()=>{
+  let rookPiece = new Rook('white', 'd5');
+  let moves = rookPiece.move(chessBoard);
+  const expectedMoves = ['d6', 'd7', 'd4', 'd3', 'c5', 'b5', 'a5', 'e5', 'f5', 'g5', 'h5'];
+  expect(moves).toEqual(expect.arrayContaining(expectedMoves));
+})

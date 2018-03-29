@@ -4,4 +4,8 @@ export default class Bishop extends ChessPiece{
   constructor(pieceColor, position){
     super('bishop', pieceColor, position);
   }
+
+  // move(chessBoardState){
+  //
+  // }
 }
