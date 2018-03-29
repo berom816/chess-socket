@@ -7,15 +7,6 @@ import Pawn from './chessPieces/pawn';
 
 let piecesOnBoard = {};
 
-piecesOnBoard['whiteRook1'] = new Rook('white', 'a1');
-// piecesOnBoard['whiteRook2'] = new Rook('h1', 'white');
-// piecesOnBoard['whiteKnight1'] = new Knight('b1', 'white');
-// piecesOnBoard['whiteKnight2'] = new Knight('g1', 'white');
-// piecesOnBoard['whiteBishop1'] = new Bishop('c1', 'white');
-// piecesOnBoard['whiteBishop2'] = new Bishop('f1', 'white');
-// piecesOnBoard['whiteQueen'] = new Queen('d1', 'white');
-// piecesOnBoard['whiteKing'] = new King('e1', 'white');
-
 function makeChessPieceObj(piecesOnBoardObj, chessPieceObjName, pieceClass, color, position){
   piecesOnBoardObj[chessPieceObjName] = new pieceClass(color, position);
 }
