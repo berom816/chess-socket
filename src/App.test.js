@@ -43,6 +43,8 @@ it('chess board starting position okay', () => {
 });
 
 it('rook move test', ()=>{
+  chessBoard['d8'].pieceOnSquare = null;
+  chessBoard['d8'].occupied = false;
   let rookPiece = new Rook('white', 'd5');
   let moves = rookPiece.move(chessBoard);
   const expectedMoves = ['d6', 'd7', 'd4', 'd3', 'c5', 'b5', 'a5', 'e5', 'f5', 'g5', 'h5'];

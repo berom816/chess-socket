@@ -1,4 +1,5 @@
 import ChessPiece from './chessPiece';
+import checkSquare from './pieceMovesHelper';
 
 export default class Rook extends ChessPiece{
   constructor(pieceColor, position){
@@ -10,50 +11,38 @@ export default class Rook extends ChessPiece{
     let accessiblePositions = [];
 
     let splitNotation = [...this.position]
-    file = splitNotation[0];
-    rank = parseInt(splitNotation[1]);
+    let file = splitNotation[0];
+    let rank = parseInt(splitNotation[1]);
+    let checkNorth = true, checkSouth = true, checkWest = true, checkEast = true;
+    let fileCode = file.charCodeAt(0);
 
-    for(let a = 0; a <Math.max(rank, (8-rank)); a++){//rook's file moves and rank moves are same amount on either side
-      if(rank + a <= 8){
-        if(!chessBoardState[file+((rank+a).toString())].occupied){
-          if(chessBoardState[file+((rank+a).toString())].pieceOnSquare.pieceColor !== this.pieceColor){
-            accessiblePositions.push(chessBoardState[file+((rank+a).toString())].position);
-          }
-        }else{
-            accessiblePositions.push(chessBoardState[file+((rank+a).toString())].position);
-        }
+    for(let i = 1; i <= Math.max(rank-1, 8-rank); i++){
+      //get north moves
+      if(rank + i <= 8 && checkNorth){
+        let nRank = rank + i;
+
+        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkNorth);
       }
 
-      if(rank - a >= 1){
-        if(!chessBoardState[file+((rank-a).toString())].occupied){
-          if(chessBoardState[file+((rank-a).toString())].pieceOnSquare.pieceColor !== this.pieceColor){
-            accessiblePositions.push(chessBoardState[file+((rank-a).toString())].position);
-          }
-        }else{
-            accessiblePositions.push(chessBoardState[file+((rank-a).toString())].position);
-        }
+      //get south moves
+      if(rank - i >= 1 && checkSouth){
+        let nRank = rank - i;
+        
+        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkSouth);
       }
 
-      if(file.charCodeAt(0) + a <= 104){
-        let nFile = String.fromCharCode(file.charCodeAt(0) + a);
-        if(!chessBoardState[nFile+rank].occupied){
-          if(chessBoardState[nFile+rank].pieceOnSquare.pieceColor !== this.pieceColor){
-            accessiblePositions.push(chessBoardState[nFile+rank].position);
-          }
-        }else{
-            accessiblePositions.push(chessBoardState[nFile+rank].position);
-        }
+      //get east moves
+      if(fileCode + i <= 104 && checkEast){ //file less than equal to 'h' file
+        let nFile = String.fromCharCode(fileCode + i);
+
+        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkEast);
       }
 
-      if(file.charCodeAt(0) - a >= 97){
-        let nFile = String.fromCharCode(file.charCodeAt(0) - a);
-        if(!chessBoardState[nFile+rank].occupied){
-          if(chessBoardState[nFile+rank].pieceOnSquare.pieceColor !== this.pieceColor){
-            accessiblePositions.push(chessBoardState[nFile+rank].position);
-          }
-        }else{
-            accessiblePositions.push(chessBoardState[nFile+rank].position);
-        }
+      //get west moves
+      if(fileCode - i >= 97 && checkWest){ //file greater than equal to 'a' file
+        let nFile = String.fromCharCode(fileCode - i);
+
+        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkWest);
       }
     }
 
