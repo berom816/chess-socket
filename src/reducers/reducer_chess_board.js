@@ -32,10 +32,10 @@ notationsKey.forEach((position,index)=>{
   }
 })
 
-_.forEach(piecesOnBoard, (value, key)=>{
-  chessBoard[value.position].occupied = true;
-  chessBoard[value.position].pieceOnSquare = value;
-})
+// _.forEach(piecesOnBoard, (value, key)=>{
+//   chessBoard[value.position].occupied = true;
+//   chessBoard[value.position].pieceOnSquare = value;
+// })
 
 export {chessBoard};
 

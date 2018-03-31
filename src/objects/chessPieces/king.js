@@ -5,4 +5,8 @@ export default class King extends ChessPiece{
     super('king', pieceColor, position);
     this.moved = false;
   }
+
+  move(chessBoardState){
+
+  }
 }
