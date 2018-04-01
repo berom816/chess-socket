@@ -6,6 +6,7 @@ import Rook from './objects/chessPieces/rook';
 import Bishop from './objects/chessPieces/bishop';
 import Queen from './objects/chessPieces/queen';
 import Knight from './objects/chessPieces/knight';
+import King from './objects/chessPieces/king';
 
 // it('chess board starting position okay', () => {
 //   expect(chessBoard.a1.pieceOnSquare.pieceName).toEqual('rook');
@@ -68,5 +69,11 @@ it('queen move test', ()=>{
 it('knight move test', ()=>{
   let knightPiece = new Knight('white', 'd4');
   let moves = knightPiece.move(chessBoard);
+  console.log(moves);
+})
+
+it('king move test', ()=>{
+  let kingPiece = new King('white', 'd4');
+  let moves = kingPiece.move(chessBoard);
   console.log(moves);
 })
