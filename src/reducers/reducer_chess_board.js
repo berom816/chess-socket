@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import npositionKey from './chessBoardPositions';
-import piecesOnBoard from '../objects/defaultGame';
+import piecesOnBoard from '../chessObjects/defaultGame';
 
 const chessBoard = {};
 

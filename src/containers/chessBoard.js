@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BoardSquare from './boardSquare';
 import positionsKey from '../reducers/chessBoardPositions';
-import piecesOnBoard from '../objects/defaultGame';
+import piecesOnBoard from '../chessObjects/defaultGame';
 
 class ChessBoard extends Component{
   constructor(props){

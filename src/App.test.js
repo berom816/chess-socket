@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {chessBoard} from './reducers/reducer_chess_board';
-import Rook from './objects/chessPieces/rook';
-import Bishop from './objects/chessPieces/bishop';
-import Queen from './objects/chessPieces/queen';
-import Knight from './objects/chessPieces/knight';
-import King from './objects/chessPieces/king';
+import Rook from './chessObjects/chessPieces/rook';
+import Bishop from './chessObjects/chessPieces/bishop';
+import Queen from './chessObjects/chessPieces/queen';
+import Knight from './chessObjects/chessPieces/knight';
+import King from './chessObjects/chessPieces/king';
 
 it('chess board starting position okay', () => {
   expect(chessBoard.a1.pieceOnSquare.pieceName).toEqual('rook');
