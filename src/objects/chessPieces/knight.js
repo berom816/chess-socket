@@ -9,9 +9,9 @@ export default class Knight extends ChessPiece{
   move(chessBoardState){
     let accessiblePositions = [];
 
-    let splitNotation = [...this.position]
-    let file = splitNotation[0];
-    let rank = parseInt(splitNotation[1]);
+    let splitPosition = [...this.position]
+    let file = splitPosition[0];
+    let rank = parseInt(splitPosition[1]);
     let fileCode = file.charCodeAt(0);
 
     if(fileCode + 1 <= 104 && rank + 2 <= 8){

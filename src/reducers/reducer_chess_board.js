@@ -1,17 +1,17 @@
 import _ from 'lodash';
-import notationsKey from './chessBoardNotation';
+import npositionKey from './chessBoardPositions';
 import piecesOnBoard from '../objects/defaultGame';
 
 const chessBoard = {};
 
-notationsKey.forEach((position,index)=>{
-  function determineColor(notationValue){
+npositionKey.forEach((position,index)=>{
+  function determineColor(positionValue){
     const halfFile = ['a', 'c', 'e', 'g'];
     const halfRank = ['1', '3', '5', '7'];
 
-    let notationSplit = notationValue.split('');
-    let file = notationSplit[0];
-    let row = notationSplit[1];
+    let positionSplit = positionValue.split('');
+    let file = positionSplit[0];
+    let row = positionSplit[1];
 
     if(halfFile.includes(file) && halfRank.includes(row)){
       return 'dark';
@@ -32,10 +32,10 @@ notationsKey.forEach((position,index)=>{
   }
 })
 
-// _.forEach(piecesOnBoard, (value, key)=>{
-//   chessBoard[value.position].occupied = true;
-//   chessBoard[value.position].pieceOnSquare = value;
-// })
+_.forEach(piecesOnBoard, (value, key)=>{
+  chessBoard[value.position].occupied = true;
+  chessBoard[value.position].pieceOnSquare = value;
+})
 
 export {chessBoard};
 

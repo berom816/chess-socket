@@ -7,10 +7,10 @@ export default class BoardSquare extends Component{
 
   render(){
     const className = `board-square ${this.props.color}`;
-
+    console.log(this.props.position);
     return(
       <div className={className}>
-        {this.props.notation}
+        {this.props.children}
       </div>
     )
   }
