@@ -18,56 +18,56 @@ export default class Knight extends ChessPiece{
       let nFile = String.fromCharCode(fileCode + 1);
       let nRank = rank + 2;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 2 <= 104 && rank + 1 <= 8){
       let nFile = String.fromCharCode(fileCode + 2);
       let nRank = rank + 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 2 <= 104 && rank - 1 >= 1){
       let nFile = String.fromCharCode(fileCode + 2);
       let nRank = rank - 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 1 <= 104 && rank - 2 >= 1){
       let nFile = String.fromCharCode(fileCode + 1);
       let nRank = rank - 2;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 1 >= 97 && rank - 2 >= 1){
       let nFile = String.fromCharCode(fileCode - 1);
       let nRank = rank - 2;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 2 >= 97 && rank - 1 >= 1){
       let nFile = String.fromCharCode(fileCode - 2);
       let nRank = rank - 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 2 >= 97 && rank + 1 <= 8){
       let nFile = String.fromCharCode(fileCode - 2);
       let nRank = rank + 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 1 >= 97 && rank + 2 <= 8){
       let nFile = String.fromCharCode(fileCode - 1);
       let nRank = rank + 2;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     return accessiblePositions;

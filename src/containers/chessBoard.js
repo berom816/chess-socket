@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ChessPiece from './chessPiece';
 import BoardSquare from './boardSquare';
+import MoveSetSquare from './moveSetSquare';
+import SelectedPieceSquare from './selectedPieceSquare';
 import positionsKey from '../reducers/chessBoardPositions';
 import piecesOnBoard from '../chessObjects/defaultGame';
 
@@ -11,25 +13,26 @@ class ChessBoard extends Component{
   }
 
   render(){
-    // console.log(piecesOnBoard);
     return(
       <div className='chess-board'>
         {
-          positionsKey.map((element)=>{
-            console.log(element);
-            // console.log(this.props.chessBoard[element].pieceOnSquare.pieceName);
-            if(this.props.chessBoard[element].occupied){
-              return (
-                <BoardSquare key={element} color={this.props.chessBoard[element].color} position={this.props.chessBoard[element]['position']} word={'testing'}>
-                  <ChessPiece chessPiece={this.props.chessBoard[element].pieceOnSquare}/>
-                </BoardSquare>
-              )
-            }else{
-              return (
-                <BoardSquare key={element} color={this.props.chessBoard[element].color} position={this.props.chessBoard[element]['position']} word={'testing'}>
-                </BoardSquare>
-              )
+          positionsKey.map((position)=>{
+            let squareTypeComponent = null;
+            if (this.props.pieceMoveArr.includes(position)){
+              squareTypeComponent = <MoveSetSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} position={position} />;
+            } else if (position === this.props.selectedPiecePosition){
+              squareTypeComponent = <SelectedPieceSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
+            } else if (this.props.chessBoard[position].occupied){
+              squareTypeComponent = <ChessPiece chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
+            } else{
+              squareTypeComponent = null;
             }
+
+            return (
+              <BoardSquare key={position} color={this.props.chessBoard[position].color} position={this.props.chessBoard[position]['position']}>
+                {squareTypeComponent}
+              </BoardSquare>
+            )
           })
         }
       </div>
@@ -38,7 +41,11 @@ class ChessBoard extends Component{
 }
 
 function mapStateToProps(state){
-  return {chessBoard:state.chessBoard};
+  return {
+    chessBoard: state.chessBoard, 
+    pieceMoveArr: state.pieceMoves,
+    selectedPiecePosition: state.selectedPiecePosition
+  };
 }
 
 export default connect(mapStateToProps)(ChessBoard);

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {choosePieceToMove} from '../actions';
+import { getPieceMoves , choosePieceToMove } from '../actions';
 
 class ChessPiece extends Component{
 	constructor(props){
@@ -12,19 +12,24 @@ class ChessPiece extends Component{
 
 	handleClick(){
 		this.props.choosePieceToMove(this.props.chessPiece);
+		this.props.getPieceMoves(this.props.chessPiece, this.props.chessBoard);
 	}
 
 	render(){
 		return(
-			<div onClick={this.handleClick}>
-				
+			<div className='chess-piece' onClick={this.handleClick}>
+				{this.props.chessPiece.pieceName}
 			</div>
 		)
 	}
 }
 
-function mapDispatchToProps(dispatch){
-	return bindActionCreators({choosePieceToMove}, dispatch);
+function mapStateToProps(state){
+	return {chessBoard:state.chessBoard};
 }
 
-export default connect(null, mapDispatchToProps)(ChessPiece);
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({ getPieceMoves, choosePieceToMove }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChessPiece);

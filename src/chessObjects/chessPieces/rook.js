@@ -20,25 +20,25 @@ export default class Rook extends ChessPiece{
       //get north moves
       if(rank + i <= 8 && checkNorth){
         let nRank = rank + i;
-        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkNorth);
+        checkNorth = checkSquare(chessBoardState, file + nRank, accessiblePositions, this.pieceColor);
       }
 
       //get south moves
       if(rank - i >= 1 && checkSouth){
         let nRank = rank - i;
-        checkSquare(chessBoardState, file + nRank, accessiblePositions, checkSouth);
+        checkSouth = checkSquare(chessBoardState, file + nRank, accessiblePositions, this.pieceColor);
       }
 
       //get east moves
       if(fileCode + i <= 104 && checkEast){ //file less than equal to 'h' file
         let nFile = String.fromCharCode(fileCode + i);
-        checkSquare(chessBoardState, nFile + rank, accessiblePositions, checkEast);
+        checkEast = checkSquare(chessBoardState, nFile + rank, accessiblePositions, this.pieceColor);
       }
 
       //get west moves
       if(fileCode - i >= 97 && checkWest){ //file greater than equal to 'a' file
         let nFile = String.fromCharCode(fileCode - i);
-        checkSquare(chessBoardState, nFile + rank, accessiblePositions, checkWest);
+        checkWest = checkSquare(chessBoardState, nFile + rank, accessiblePositions, this.pieceColor);
       }
     }
 

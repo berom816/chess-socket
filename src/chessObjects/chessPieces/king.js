@@ -18,53 +18,53 @@ export default class King extends ChessPiece{
     if(rank + 1 <= 8){
       let nRank = rank + 1;
 
-      checkSquare(chessBoardState, file + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, file + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 1 <= 104 && rank + 1 <= 8){
       let nFile = String.fromCharCode(fileCode + 1);
       let nRank = rank + 1;
       
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 1 <= 104){
       let nFile = String.fromCharCode(fileCode + 1);
       
-      checkSquare(chessBoardState, nFile + rank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + rank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode + 1 <= 104 && rank - 1 >= 1){
       let nFile = String.fromCharCode(fileCode + 1);
       let nRank = rank - 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(rank - 1 >= 1){
       let nRank = rank - 1;
 
-      checkSquare(chessBoardState, file + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, file + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 1 >= 97 && rank - 1 >= 1){
       let nFile = String.fromCharCode(fileCode - 1);
       let nRank = rank - 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 1 >= 97){
       let nFile = String.fromCharCode(fileCode - 1);
 
-      checkSquare(chessBoardState, nFile + rank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + rank, accessiblePositions, this.pieceColor);
     }
 
     if(fileCode - 1 >= 97 && rank + 1 <= 8){
       let nFile = String.fromCharCode(fileCode - 1);
       let nRank = rank + 1;
 
-      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, false);
+      checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
     }
 
     //check for castling

@@ -23,8 +23,8 @@ export default class Bishop extends ChessPiece{
       if(rank + i <= 8 && fileCode - i >= 97 && checkNW){ //file greater than equal to 'a' file
         let nFile = String.fromCharCode(fileCode - i);
         let nRank = rank + i;
-
-        checkSquare(chessBoardState, nFile + nRank, accessiblePositions, checkNW);
+        
+        checkNW = checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
       }
 
       //check northeast moves
@@ -32,7 +32,7 @@ export default class Bishop extends ChessPiece{
         let nFile = String.fromCharCode(fileCode + i);
         let nRank = rank + i;
 
-        checkSquare(chessBoardState, nFile + nRank, accessiblePositions, checkNE);
+        checkNE = checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
       }
 
       //check southwest moves
@@ -40,15 +40,15 @@ export default class Bishop extends ChessPiece{
         let nFile = String.fromCharCode(fileCode - i);
         let nRank = rank - i;
 
-        checkSquare(chessBoardState, nFile + nRank, accessiblePositions, checkSW);
+        checkSW = checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
       }
 
       //check southeast moves
-      if(rank - i >= 1 && fileCode - i <= 104 && checkSE){ //file less than equal to 'h' file
+      if(rank - i >= 1 && fileCode + i <= 104 && checkSE){ //file less than equal to 'h' file
         let nFile = String.fromCharCode(fileCode + i);
         let nRank = rank - i;
 
-        checkSquare(chessBoardState, nFile + nRank, accessiblePositions, checkSE);
+        checkSE = checkSquare(chessBoardState, nFile + nRank, accessiblePositions, this.pieceColor);
       }
     }
 
