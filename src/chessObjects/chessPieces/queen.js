@@ -16,7 +16,7 @@ export default class Queen extends ChessPiece{
     let checkNW = true, checkNE = true, checkSW = true, checkSE = true;
     let fileCode = file.charCodeAt(0);
 
-    for(let i = 1; i <= Math.max(rank - 1, 8 - rank); i++){
+    for(let i = 1; i <= Math.max(rank - 1, 8 - rank, fileCode - 97, 104 - fileCode); i++){
       //get north moves
       if(rank + i <= 8 && checkNorth){
         let nRank = rank + i;

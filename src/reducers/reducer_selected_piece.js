@@ -3,7 +3,7 @@ import { SELECTED_PIECE_TO_MOVE, DESELECT_PIECE, MOVE_PIECE_TO_SQUARE } from '..
 export default function(state = null, action){
   switch(action.type){
     case SELECTED_PIECE_TO_MOVE:
-      return action.payload.position;
+      return action.payload;
     case DESELECT_PIECE:
       return null;
     case MOVE_PIECE_TO_SQUARE:

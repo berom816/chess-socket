@@ -20,7 +20,7 @@ class ChessBoard extends Component{
             let squareTypeComponent = null;
             if (this.props.pieceMoveArr.includes(position)){
               squareTypeComponent = <MoveSetSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} position={position} />;
-            } else if (position === this.props.selectedPiecePosition){
+            } else if (this.props.selectedPiece !== null && position === this.props.selectedPiece.position){
               squareTypeComponent = <SelectedPieceSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
             } else if (this.props.chessBoard[position].occupied){
               squareTypeComponent = <ChessPiece chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
@@ -44,7 +44,7 @@ function mapStateToProps(state){
   return {
     chessBoard: state.chessBoard, 
     pieceMoveArr: state.pieceMoves,
-    selectedPiecePosition: state.selectedPiecePosition
+    selectedPiece: state.selectedPiece
   };
 }
 

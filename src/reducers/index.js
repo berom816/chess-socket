@@ -6,7 +6,7 @@ import PieceSelectedReducer from './reducer_selected_piece';
 const rootReducer = combineReducers({
   chessBoard: ChessBoardReducer,
   pieceMoves: PieceMovesReducer,
-  selectedPiecePosition: PieceSelectedReducer
+  selectedPiece: PieceSelectedReducer
 });
 
 export default rootReducer;

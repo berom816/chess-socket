@@ -11,12 +11,14 @@ class MoveSetSquare extends Component {
   }
 
   handleClick() {
-    this.props.movePieceToSquare(this.props.position, this.props.selectedPiecePosition);
-    this.props.chessPiece.position = this.props.position;
+    this.props.movePieceToSquare(this.props.position, this.props.selectedPiece.position);
+    this.props.selectedPiece.position = this.props.position;
+    if(this.props.selectedPiece.hasOwnProperty('moved')){
+      this.props.selectedPiece.moved = true;
+    }
   }
 
   render() {
-    console.log('movesetsquare props chessPiece', this.props.chessPiece);
     return (
       <div className='move-set-square' onClick={this.handleClick}>
         {this.props.chessPiece ? this.props.chessPiece.pieceName : ''}
@@ -26,7 +28,7 @@ class MoveSetSquare extends Component {
 }
 
 function mapStateToProps(state){
-  return { selectedPiecePosition: state.selectedPiecePosition };
+  return { selectedPiece: state.selectedPiece };
 }
 
 function mapDispatchToProps(dispatch) {
