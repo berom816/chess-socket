@@ -9,9 +9,10 @@ export default class Bishop extends ChessPiece{
   move(chessBoardState){
     let accessiblePositions = [];
 
-    let splitPosition = [...this.position]
-    let file = splitPosition[0];
-    let rank = parseInt(splitPosition[1]);
+    // let splitPosition = [...this.position]
+    // let file = splitPosition[0];
+    let file = this.position.charAt(0);
+    let rank = parseInt(this.position.charAt(1));
 
     let checkNW = true, checkNE = true, checkSW = true, checkSE = true;
     let lowEnd = rank - 1;

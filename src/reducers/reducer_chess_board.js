@@ -31,7 +31,6 @@ positionsKey.forEach((position,index)=>{
     color:determineColor(position),
     occupied:false,
     pieceOnSquare:null,
-    // selectedPieceMoves:false
   }
 })
 
@@ -55,14 +54,10 @@ export default function(state = chessBoard, action){
       let selectedPostionPiece = newBoardState[selectedPosition].pieceOnSquare;
       if (selectedPiece.pieceName === 'king' && selectedPostionPiece && selectedPostionPiece.pieceName === 'rook' && selectedPostionPiece.pieceColor === selectedPiece.pieceColor){
 
-        let kingPostionSplit = [...selectedPiece.position];
-        let kingPositionFile = kingPostionSplit[0];
-        let kingPositionRank = kingPostionSplit[1];
-        let selectedPositionSplit = [...selectedPosition];
-        let selectedPositionFile = selectedPositionSplit[0];
+        let kingPositionFile = selectedPiece.position.charAt(0);
+        let kingPositionRank = selectedPiece.position.charAt(1);
+        let selectedPositionFile = selectedPosition.charAt(0);
 
-        console.log('kingPositionFile.charCodeAt(0)', kingPositionFile.charCodeAt(0))
-        console.log('selectedPositionFile.charCodeAt(0)', selectedPositionFile.charCodeAt(0))
         if(kingPositionFile.charCodeAt(0) < selectedPositionFile.charCodeAt(0)){
           newBoardState['g' + kingPositionRank].occupied = true;
           newBoardState['g' + kingPositionRank].pieceOnSquare = selectedPiece;

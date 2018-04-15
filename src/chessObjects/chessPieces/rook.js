@@ -10,9 +10,8 @@ export default class Rook extends ChessPiece{
   move(chessBoardState){
     let accessiblePositions = [];
 
-    let splitPosition = [...this.position]
-    let file = splitPosition[0];
-    let rank = parseInt(splitPosition[1]);
+    let file = this.position.charAt(0);
+    let rank = parseInt(this.position.charAt(1));
     let checkNorth = true, checkSouth = true, checkWest = true, checkEast = true;
     let fileCode = file.charCodeAt(0);
 
