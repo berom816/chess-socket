@@ -48,10 +48,59 @@ export default function(state = chessBoard, action){
     case MOVE_PIECE_TO_SQUARE:
       let newBoardState = {...state};
       let selectedPosition = action.payload.selectedPosition;
-      let selectedPiecePosition = action.payload.selectedPiecePosition;
+      let selectedPiece = action.payload.selectedPiece;
+      let selectedPiecePosition = selectedPiece.position;
+
+      //check for castling, special move
+      let selectedPostionPiece = newBoardState[selectedPosition].pieceOnSquare;
+      if (selectedPiece.pieceName === 'king' && selectedPostionPiece && selectedPostionPiece.pieceName === 'rook' && selectedPostionPiece.pieceColor === selectedPiece.pieceColor){
+
+        let kingPostionSplit = [...selectedPiece.position];
+        let kingPositionFile = kingPostionSplit[0];
+        let kingPositionRank = kingPostionSplit[1];
+        let selectedPositionSplit = [...selectedPosition];
+        let selectedPositionFile = selectedPositionSplit[0];
+
+        console.log('kingPositionFile.charCodeAt(0)', kingPositionFile.charCodeAt(0))
+        console.log('selectedPositionFile.charCodeAt(0)', selectedPositionFile.charCodeAt(0))
+        if(kingPositionFile.charCodeAt(0) < selectedPositionFile.charCodeAt(0)){
+          newBoardState['g' + kingPositionRank].occupied = true;
+          newBoardState['g' + kingPositionRank].pieceOnSquare = selectedPiece;
+          newBoardState['g' + kingPositionRank].pieceOnSquare.position = 'g' + kingPositionRank;
+          newBoardState['g' + kingPositionRank].pieceOnSquare.moved = true;
+
+          newBoardState['f' + kingPositionRank].occupied = true;
+          newBoardState['f' + kingPositionRank].pieceOnSquare = newBoardState[selectedPosition].pieceOnSquare;
+          newBoardState['f' + kingPositionRank].pieceOnSquare.position = 'f' + kingPositionRank;
+          newBoardState['f' + kingPositionRank].pieceOnSquare.moved = true;
+          
+        }else{
+          newBoardState['c' + kingPositionRank].occupied = true;
+          newBoardState['c' + kingPositionRank].pieceOnSquare = selectedPiece;
+          newBoardState['c' + kingPositionRank].pieceOnSquare.position = 'c' + kingPositionRank;
+          newBoardState['c' + kingPositionRank].pieceOnSquare.moved = true;
+
+          newBoardState['d' + kingPositionRank].occupied = true;
+          newBoardState['d' + kingPositionRank].pieceOnSquare = newBoardState[selectedPosition].pieceOnSquare;
+          newBoardState['d' + kingPositionRank].pieceOnSquare.position = 'd' + kingPositionRank;
+          newBoardState['d' + kingPositionRank].pieceOnSquare.moved = true;
+        }
+        
+        newBoardState[selectedPiecePosition].occupied = false;
+        newBoardState[selectedPiecePosition].pieceOnSquare = null;
+
+        newBoardState[selectedPosition].occupied = false;
+        newBoardState[selectedPosition].pieceOnSquare = null;
+
+        return newBoardState
+      }
       
       newBoardState[selectedPosition].occupied = true;
       newBoardState[selectedPosition].pieceOnSquare = newBoardState[selectedPiecePosition].pieceOnSquare;
+      newBoardState[selectedPosition].pieceOnSquare.position = selectedPosition;
+      if (newBoardState[selectedPosition].pieceOnSquare.hasOwnProperty('moved')) {
+        newBoardState[selectedPosition].pieceOnSquare.moved = true;
+      }
       
       newBoardState[selectedPiecePosition].occupied = false;
       newBoardState[selectedPiecePosition].pieceOnSquare = null;

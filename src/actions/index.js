@@ -2,6 +2,7 @@ export const SELECTED_PIECE_TO_MOVE = 'SELECTED_PIECE_TO_MOVE';
 export const FIND_PIECE_MOVES = 'FIND_PIECE_MOVES';
 export const DESELECT_PIECE = 'DESELECT_PIECE';
 export const MOVE_PIECE_TO_SQUARE = 'MOVE_PIECE_TO_SQUARE';
+export const CHANGE_TURN = 'CHANGE_TURN';
 
 export function choosePieceToMove(chessPiece){
 	return {
@@ -24,12 +25,19 @@ export function deselectPiece(){
 	}
 }
 
-export function movePieceToSquare(selectedPosition, selectedPiecePosition){
+export function movePieceToSquare(selectedPosition, selectedPiece){
 	return {
 		type: MOVE_PIECE_TO_SQUARE,
 		payload: {
 			selectedPosition,
-			selectedPiecePosition
+			selectedPiece
 		}
+	}
+}
+
+export function changeTurn(){
+	return {
+		type: CHANGE_TURN,
+		payload: null
 	}
 }

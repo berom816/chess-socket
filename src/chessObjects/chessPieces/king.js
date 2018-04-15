@@ -74,8 +74,8 @@ export default class King extends ChessPiece{
 
       if(chessBoardState[rookSquare1].occupied && chessBoardState[rookSquare1].pieceOnSquare.pieceColor === this.pieceColor && !chessBoardState[rookSquare1].pieceOnSquare.moved){
         let noPieceBetween = true;
-        for(let j = 0; j < fileCode - 97; j++){
-          if(chessBoardState[String.fromCharCode(fileCode - j) + rank].occupied){
+        for(let j = 98; j < fileCode; j++){
+          if(chessBoardState[String.fromCharCode(j) + rank].occupied){
             noPieceBetween = false;
             break;
           }
@@ -87,20 +87,22 @@ export default class King extends ChessPiece{
       }
 
       if(chessBoardState[rookSquare2].occupied && chessBoardState[rookSquare2].pieceOnSquare.pieceColor === this.pieceColor && !chessBoardState[rookSquare2].pieceOnSquare.moved){
+        console.log('here')
         let noPieceBetween = true;
-        for(let j = 0; j < 104 - fileCode; j++){
-          if(chessBoardState[String.fromCharCode(fileCode + j) + rank].occupied){
+        console.log("fileCode", fileCode);
+        for(let j = fileCode + 1; j < 104; j++){
+          if(chessBoardState[String.fromCharCode(j) + rank].occupied){
             noPieceBetween = false;
             break;
           }
         }
-
+        console.log(noPieceBetween)
         if(noPieceBetween){
           accessiblePositions.push(rookSquare2);
         }
       }
     }
-
+    console.log('accessiblePositions', accessiblePositions)
     return accessiblePositions;
   }
 }

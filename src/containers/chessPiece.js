@@ -11,6 +11,9 @@ class ChessPiece extends Component{
 	}
 
 	handleClick(){
+		if(this.props.chessPiece.pieceColor !== this.props.turn){
+			return;
+		}
 		this.props.choosePieceToMove(this.props.chessPiece);
 		this.props.getPieceMoves(this.props.chessPiece, this.props.chessBoard);
 	}
@@ -18,6 +21,8 @@ class ChessPiece extends Component{
 	render(){
 		return(
 			<div className='chess-piece' onClick={this.handleClick}>
+				{this.props.chessPiece.pieceColor}
+				<br/>
 				{this.props.chessPiece.pieceName}
 			</div>
 		)
@@ -25,7 +30,10 @@ class ChessPiece extends Component{
 }
 
 function mapStateToProps(state){
-	return {chessBoard:state.chessBoard};
+	return {
+		chessBoard: state.chessBoard, 
+		turn: state.turn
+	};
 }
 
 function mapDispatchToProps(dispatch){

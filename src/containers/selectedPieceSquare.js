@@ -15,7 +15,6 @@ class SelectedPieceSquare extends Component{
   }
 
   render(){
-    console.log(this.props.chessPiece);
     return (
       <div className='selected-piece-square' onClick={this.handleClick}>
         {this.props.chessPiece ? this.props.chessPiece.pieceName : ''}

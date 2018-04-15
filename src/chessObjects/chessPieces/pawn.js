@@ -14,20 +14,24 @@ export default class Pawn extends ChessPiece{
     let rank = parseInt(splitPosition[1]);
     let fileCode = file.charCodeAt(0);
 
-    if(!this.moved){
-      let nRank = this.pieceColor === 'white' ? rank + 2 : rank - 2;
+    let blocking = false;
 
-      let nPosition = file + nRank;
-      if (!chessBoardState[nPosition].occupied){
-        accessiblePositions.push(nPosition);
-      }
-    }
-    
     let nRank = this.pieceColor === 'white' ? rank + 1 : rank - 1; 
     if(nRank >= 1 && nRank <= 8){
       let nPosition = file + nRank;
       
-      if (!chessBoardState[nPosition].occupied) {
+      if (!chessBoardState[nPosition].occupied){
+        accessiblePositions.push(nPosition);
+      }else{
+        blocking = true;
+      }
+    }
+
+    if(!this.moved && !blocking){
+      let nRank = this.pieceColor === 'white' ? rank + 2 : rank - 2;
+
+      let nPosition = file + nRank;
+      if (!chessBoardState[nPosition].occupied){
         accessiblePositions.push(nPosition);
       }
     }
