@@ -3,6 +3,8 @@ export const FIND_PIECE_MOVES = 'FIND_PIECE_MOVES';
 export const DESELECT_PIECE = 'DESELECT_PIECE';
 export const MOVE_PIECE_TO_SQUARE = 'MOVE_PIECE_TO_SQUARE';
 export const CHANGE_TURN = 'CHANGE_TURN';
+export const CHANGE_LAST_MOVED_PIECE_START_POSITION = 'CHANGE_LAST_MOVED_PIECE_START_POSITION';
+export const CHANGE_LAST_MOVED_PIECE_END_POSITION = 'CHANGE_LAST_MOVED_PIECE_END_POSITION';
 
 export function choosePieceToMove(chessPiece){
 	return {
@@ -39,5 +41,12 @@ export function changeTurn(){
 	return {
 		type: CHANGE_TURN,
 		payload: null
+	}
+}
+
+export function changeLastMovedPieceStartPosition(startPosition){
+	return {
+		type: CHANGE_LAST_MOVED_PIECE_START_POSITION, 
+		payload: startPosition
 	}
 }

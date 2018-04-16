@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { movePieceToSquare, changeTurn } from '../actions';
+import { movePieceToSquare, changeTurn, changeLastMovedPieceStartPosition } from '../actions';
 
 class MoveSetSquare extends Component {
   constructor(props) {
@@ -11,12 +11,9 @@ class MoveSetSquare extends Component {
   }
 
   handleClick() {
+    this.props.changeLastMovedPieceStartPosition(this.props.selectedPiece.position);
     this.props.movePieceToSquare(this.props.position, this.props.selectedPiece);
-    // this.props.selectedPiece.position = this.props.position;
     this.props.changeTurn();
-    // if(this.props.selectedPiece.hasOwnProperty('moved')){
-    //   this.props.selectedPiece.moved = true;
-    // }
   }
 
   render() {
@@ -35,7 +32,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ movePieceToSquare, changeTurn }, dispatch);
+  return bindActionCreators({ movePieceToSquare, changeTurn, changeLastMovedPieceStartPosition }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoveSetSquare);

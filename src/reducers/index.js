@@ -3,14 +3,16 @@ import ChessBoardReducer from './reducer_chess_board';
 import TurnReducer from './reducer_turn';
 import PieceMovesReducer from './reducer_piece_moves';
 import PieceSelectedReducer from './reducer_selected_piece';
-// import LastMovedPieceReducer from './reducer_last_moved_piece';
+import LastMovedPieceStartPositionReducer from './reducer_last_moved_piece_start_position';
+// import LastMovedPieceEndPositionReducer from './reducer_last_moved_piece_end_position';
 
 const rootReducer = combineReducers({
   chessBoard: ChessBoardReducer,
   turn: TurnReducer,
   pieceMoves: PieceMovesReducer,
   selectedPiece: PieceSelectedReducer,
-  // lastMovedPiece: LastMovedPieceReducer
+  lastMovedPieceStartPosition: LastMovedPieceStartPositionReducer, 
+  // lastMovedPieceEndPosition: LastMovedPieceEndPositionReducer
 });
 
 export default rootReducer;

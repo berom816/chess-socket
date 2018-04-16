@@ -4,8 +4,9 @@ import ChessPiece from './chessPiece';
 import BoardSquare from './boardSquare';
 import MoveSetSquare from './moveSetSquare';
 import SelectedPieceSquare from './selectedPieceSquare';
+import LastMovedStartSquare from '../components/lastMovedPieceStartSquare';
 import positionsKey from '../reducers/chessBoardPositions';
-import piecesOnBoard from '../chessObjects/defaultGame';
+// import piecesOnBoard from '../chessObjects/defaultGame';
 
 class ChessBoard extends Component{
   constructor(props){
@@ -24,6 +25,8 @@ class ChessBoard extends Component{
               squareTypeComponent = <SelectedPieceSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
             } else if (this.props.chessBoard[position].occupied){
               squareTypeComponent = <ChessPiece chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
+            } else if (this.props.lastMovedPieceStartPosition === position){
+              squareTypeComponent = <LastMovedStartSquare />
             } else{
               squareTypeComponent = null;
             }
@@ -44,7 +47,8 @@ function mapStateToProps(state){
   return {
     chessBoard: state.chessBoard, 
     pieceMoveArr: state.pieceMoves,
-    selectedPiece: state.selectedPiece
+    selectedPiece: state.selectedPiece, 
+    lastMovedPieceStartPosition: state.lastMovedPieceStartPosition
   };
 }
 
