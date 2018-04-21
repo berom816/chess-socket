@@ -5,6 +5,7 @@ import BoardSquare from './boardSquare';
 import MoveSetSquare from './moveSetSquare';
 import SelectedPieceSquare from './selectedPieceSquare';
 import LastMovedStartSquare from '../components/lastMovedPieceStartSquare';
+import LastMovedEndSquare from '../components/lastMovedPieceEndSquare';
 import positionsKey from '../reducers/chessBoardPositions';
 // import piecesOnBoard from '../chessObjects/defaultGame';
 
@@ -23,10 +24,12 @@ class ChessBoard extends Component{
               squareTypeComponent = <MoveSetSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} position={position} />;
             } else if (this.props.selectedPiece !== null && position === this.props.selectedPiece.position){
               squareTypeComponent = <SelectedPieceSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
-            } else if (this.props.chessBoard[position].occupied){
-              squareTypeComponent = <ChessPiece chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
+            } else if (this.props.lastMovedPieceEndPosition === position){
+              squareTypeComponent = <LastMovedEndSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
             } else if (this.props.lastMovedPieceStartPosition === position){
               squareTypeComponent = <LastMovedStartSquare />
+            } else if (this.props.chessBoard[position].occupied){
+              squareTypeComponent = <ChessPiece chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
             } else{
               squareTypeComponent = null;
             }
@@ -48,7 +51,8 @@ function mapStateToProps(state){
     chessBoard: state.chessBoard, 
     pieceMoveArr: state.pieceMoves,
     selectedPiece: state.selectedPiece, 
-    lastMovedPieceStartPosition: state.lastMovedPieceStartPosition
+    lastMovedPieceStartPosition: state.lastMovedPieceStartPosition,
+    lastMovedPieceEndPosition: state.lastMovedPieceEndPosition,
   };
 }
 

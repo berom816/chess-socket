@@ -1,9 +1,9 @@
 import ChessPiece from './chessPiece';
 
 export default class Pawn extends ChessPiece{
-  constructor(pieceColor, position){
+  constructor(pieceColor, position, moved = false){
     super('pawn', pieceColor, position);
-    this.moved = false;
+    this.moved = moved;
   }
 
   move(chessBoardState){

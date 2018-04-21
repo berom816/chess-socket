@@ -2,9 +2,9 @@ import ChessPiece from './chessPiece';
 import checkSquare from './pieceMovesHelper';
 
 export default class King extends ChessPiece{
-  constructor(pieceColor, position){
+  constructor(pieceColor, position, moved = false){
     super('king', pieceColor, position);
-    this.moved = false;
+    this.moved = moved;
   }
 
   move(chessBoardState){

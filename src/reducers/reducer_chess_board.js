@@ -52,7 +52,8 @@ export default function(state = chessBoard, action){
 
       //check for castling, special move
       let selectedPostionPiece = newBoardState[selectedPosition].pieceOnSquare;
-      if (selectedPiece.pieceName === 'king' && selectedPostionPiece && selectedPostionPiece.pieceName === 'rook' && selectedPostionPiece.pieceColor === selectedPiece.pieceColor){
+      
+      if (selectedPiece.pieceName === 'king' && newBoardState[selectedPosition].occupied && selectedPostionPiece.pieceName === 'rook' && selectedPostionPiece.pieceColor === selectedPiece.pieceColor){
 
         let kingPositionFile = selectedPiece.position.charAt(0);
         let kingPositionRank = selectedPiece.position.charAt(1);
