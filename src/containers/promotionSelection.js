@@ -10,7 +10,7 @@ export default class PromotionSelect extends Component{
 
     render(){
       return (
-        <div>
+        <div className='promotion-selection'>
           <PromotionPiece choice='queen' />
           <PromotionPiece choice='rook' />
           <PromotionPiece choice='knight' />

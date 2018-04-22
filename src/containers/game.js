@@ -13,7 +13,7 @@ class Game extends Component{
     let promotionScreen = this.props.onPromotionSelection ? <PromotionSelection /> : null;
 
     return (
-      <div>
+      <div className='game'>
         {promotionScreen}
         <ChessBoard/>
       </div>

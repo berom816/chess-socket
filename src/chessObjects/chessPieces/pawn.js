@@ -6,12 +6,12 @@ export default class Pawn extends ChessPiece{
     this.moved = moved;
   }
 
-  move(chessBoardState){
+  move(chessBoardState, lastMovedPiece, lastMovedPieceStartPosition, lastMovedPieceEndPosition){
     let accessiblePositions = [];
 
     let file = this.position.charAt(0);
-    let rank = parseInt(this.position.charAt(1));
     let fileCode = file.charCodeAt(0);
+    let rank = parseInt(this.position.charAt(1));
 
     let blocking = false;
 
@@ -50,6 +50,25 @@ export default class Pawn extends ChessPiece{
 
       if (chessBoardState[nPosition].occupied && chessBoardState[nPosition].pieceOnSquare.pieceColor !== this.pieceColor) {
         accessiblePositions.push(nPosition);
+      }
+    }
+
+    if (lastMovedPiece && lastMovedPieceStartPosition && lastMovedPieceEndPosition){
+      //check for en passant, special move
+      if (lastMovedPiece.pieceName === 'pawn' && lastMovedPiece.pieceColor !== this.pieceColor){
+        //check for double square move and opponent 
+        let startPositionFile = lastMovedPieceStartPosition.charAt(0);
+        let startPositionRank = parseInt(lastMovedPieceStartPosition.charAt(1));
+        let endPositionFile = lastMovedPieceEndPosition.charAt(0);
+        let endPositionRank = parseInt(lastMovedPieceEndPosition.charAt(1));
+
+        if(Math.abs(startPositionRank - endPositionRank) === 2){//a double square move
+          let endPositionFileCode = endPositionFile.charCodeAt(0);
+          if ((fileCode + 1 === endPositionFileCode || fileCode - 1 === endPositionFileCode) && endPositionRank === rank){//last moved piece next to current selected pawn
+            let selectedPieceEndPosRank = this.pieceColor === 'white' ? endPositionRank + 1 : endPositionRank - 1;
+            accessiblePositions.push(endPositionFile + selectedPieceEndPosRank.toString());
+          }
+        }
       }
     }
 

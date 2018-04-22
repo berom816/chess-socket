@@ -3,9 +3,7 @@ import { CHANGE_LAST_MOVED_PIECE_END_POSITION } from '../actions';
 export default function(state = null, action){
   switch(action.type){
     case CHANGE_LAST_MOVED_PIECE_END_POSITION:
-      let selectedPosition = action.payload.selectedPosition;
-      let selectedPiece = action.payload.selectedPiece;
-      let chessBoard = action.payload.chessBoard;
+      let { selectedPosition, selectedPiece, chessBoard } = action.payload; 
 
       //check if castling, special move
       if (selectedPiece.pieceName === 'king' && chessBoard[selectedPosition].occupied && chessBoard[selectedPosition].pieceOnSquare.pieceName === 'rook' && chessBoard[selectedPosition].pieceOnSquare.pieceColor === selectedPiece.pieceColor){

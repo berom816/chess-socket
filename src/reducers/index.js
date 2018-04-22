@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   selectedPiece: PieceSelectedReducer,
   lastMovedPieceStartPosition: LastMovedPieceStartPositionReducer, 
   lastMovedPieceEndPosition: LastMovedPieceEndPositionReducer,
-  // lastMovedPiece:lastMovedPieceReducer,
+  lastMovedPiece: LastMovedPieceReducer,
   onPromotionSelection: OnPromotionSelectionReducer
 });
 

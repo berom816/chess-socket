@@ -16,10 +16,10 @@ export function choosePieceToMove(chessPiece){
 	}
 }
 
-export function getPieceMoves(chessPiece, chessBoardState){
+export function getPieceMoves(chessPiece, chessBoardState, lastMovedPiece, lastMovedPieceStartPosition, lastMovedPieceEndPosition){
 	return {
 		type: FIND_PIECE_MOVES, 
-		payload: chessPiece.move(chessBoardState)
+		payload: chessPiece.move(chessBoardState, lastMovedPiece, lastMovedPieceStartPosition, lastMovedPieceEndPosition)
 	}
 }
 
@@ -83,11 +83,14 @@ export function changePromotionState(flag){
 	}
 }
 
-export function choosePromotionPiece(pieceType){
+export function choosePromotionPiece(pieceType, pieceColor, position){
+	//might have to check if it's current player's turn to able to choose promotion piece
 	return {
 		type:CHOOSE_PROMOTION_PIECE,
 		payload:{
-			pieceType
+			pieceType,
+			pieceColor, 
+			position
 		}
 	}
 }

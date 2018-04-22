@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { choosePromotionPiece } from '../actions';
+import { choosePromotionPiece, changePromotionState, changeTurn } from '../actions';
 
 class PromotionPiece extends Component{
   constructor(props){
@@ -11,21 +11,30 @@ class PromotionPiece extends Component{
   }
 
   handleClick(){
-    this.props.choosePromotionPiece(this.props.choice);
+    this.props.choosePromotionPiece(this.props.choice, this.props.turnColor, this.props.endPostion);
+    this.props.changePromotionState(false);
+    this.props.changeTurn();
   }
 
   render(){
     return (
-      <div onClick={this.handleClick}>
+      <div className='promotion-piece' onClick={this.handleClick}>
         {this.props.choice}
       </div>
     )
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({ choosePromotionPiece}, dispatch);
+function mapStateToProps(state){
+  return { 
+    turnColor: state.turn,
+    endPostion: state.lastMovedPieceEndPosition
+  };
 }
 
-export default connect(mapDispatchToProps)(PromotionPiece);
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ choosePromotionPiece, changePromotionState, changeTurn }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PromotionPiece);
 

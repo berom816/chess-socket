@@ -15,7 +15,7 @@ class ChessPiece extends Component{
 			return;
 		}
 		this.props.choosePieceToMove(this.props.chessPiece);
-		this.props.getPieceMoves(this.props.chessPiece, this.props.chessBoard);
+		this.props.getPieceMoves(this.props.chessPiece, this.props.chessBoard, this.props.lastMovedPiece, this.props.lastMovedPieceStartPosition, this.props.lastMovedPieceEndPosition);
 	}
 
 	render(){
@@ -32,7 +32,10 @@ class ChessPiece extends Component{
 function mapStateToProps(state){
 	return {
 		chessBoard: state.chessBoard, 
-		turn: state.turn
+		turn: state.turn,
+		lastMovedPiece: state.lastMovedPiece, 
+		lastMovedPieceStartPosition: state.lastMovedPieceStartPosition,
+		lastMovedPieceEndPosition: state.lastMovedPieceEndPosition
 	};
 }
 

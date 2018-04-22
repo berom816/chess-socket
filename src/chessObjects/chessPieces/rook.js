@@ -9,7 +9,6 @@ export default class Rook extends ChessPiece{
 
   move(chessBoardState){
     let accessiblePositions = [];
-
     let file = this.position.charAt(0);
     let rank = parseInt(this.position.charAt(1));
     let checkNorth = true, checkSouth = true, checkWest = true, checkEast = true;
