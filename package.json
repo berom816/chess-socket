@@ -3,16 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.16.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berom816/chess-socket.git"
+  },
+  "author": "Benny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/berom816/chess-socket/issues"
+  },
+  "homepage": "https://github.com/berom816/chess-socket#readme"
 }

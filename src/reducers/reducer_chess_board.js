@@ -1,52 +1,12 @@
-import _ from 'lodash';
-import positionsKey from './chessBoardPositions';
-import piecesOnBoard from '../chessObjects/defaultGame';
-import { MOVE_PIECE_TO_SQUARE, CHOOSE_PROMOTION_PIECE } from '../actions';
+import defaultGameBoard from './defaultGameBoard';
+import { MOVE_PIECE_TO_SQUARE, CHOOSE_PROMOTION_PIECE, EMITTED_NEW_BOARD_STATE } from '../actions';
 import ChessPiece from '../chessObjects/chessPieces/chessPiece';
 import Queen from '../chessObjects/chessPieces/queen';
 import Rook from '../chessObjects/chessPieces/rook';
 import Knight from '../chessObjects/chessPieces/knight';
 import Bishop from '../chessObjects/chessPieces/bishop';
 
-const chessBoard = {};
-
-positionsKey.forEach((position,index)=>{
-  function determineColor(positionValue){
-    const halfFile = ['a', 'c', 'e', 'g'];
-    const halfRank = ['1', '3', '5', '7'];
-
-    let positionSplit = positionValue.split('');
-    let file = positionSplit[0];
-    let row = positionSplit[1];
-
-    if(halfFile.includes(file) && halfRank.includes(row)){
-      return 'dark';
-    }else if(halfFile.includes(file) && !halfRank.includes(row)){
-      return 'light';
-    }else if(!halfFile.includes(file) && halfRank.includes(row)){
-      return 'light';
-    }else{
-      return 'dark';
-    }
-  }
-
-  chessBoard[position] = {
-    position:position,
-    color:determineColor(position),
-    occupied:false,
-    pieceOnSquare:null,
-  }
-})
-
-_.forEach(piecesOnBoard, (value, key)=>{
-  chessBoard[value.position].occupied = true;
-  chessBoard[value.position].pieceOnSquare = value;
-})
-
-export {chessBoard};
-
-
-export default function(state = chessBoard, action){
+export default function (state = defaultGameBoard, action){
   switch(action.type){
     case MOVE_PIECE_TO_SQUARE:
       let newBoardState = {...state};
@@ -150,6 +110,9 @@ export default function(state = chessBoard, action){
 
       newBoardState2[promotionPiecePosition].pieceOnSquare = newPiece;
       return newBoardState2;
+
+    case EMITTED_NEW_BOARD_STATE:
+      return action.payload;
 
     default:
       return state;
