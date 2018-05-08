@@ -21,7 +21,7 @@ class Game extends Component{
   }
 
   render(){
-    console.log('happened')
+    // console.log('happened')
     //emit new chess state to server
     let newBoardState = {
       chessBoard: this.props.chessBoard,
@@ -35,49 +35,71 @@ class Game extends Component{
     socket.on('switch turn', (newStateFromEmit)=>{
       //check if the current state already matches the new state emited from server, if so do not update
       let {chessBoard, turn, lastMovedPieceStartPosition, lastMovedPieceEndPosition, lastMovedPiece} = newStateFromEmit;
+      
+      let thisPropBoard = this.props.chessBoard;
+      let thisPropTurn = this.props.turn;
+      let thisPropStart = this.props.lastMovedPieceStartPosition;
+      let thisPropEnd = this.props.lastMovedPieceEndPosition;
+      let thisLastMove = this.props.lastMovedPiece;
+
+      //function to convert chess board pieces on board into chess piece objects
+      function convertToChessPieceObj(pieceOnSquare) {
+        if (!pieceOnSquare) {
+          return null;
+        }
+        switch (pieceOnSquare.pieceName) {
+          case 'king':
+            return new King(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
+          case 'queen':
+            return new Queen(pieceOnSquare.pieceColor, pieceOnSquare.position);
+          case 'bishop':
+            return new Bishop(pieceOnSquare.pieceColor, pieceOnSquare.position);
+          case 'knight':
+            return new Knight(pieceOnSquare.pieceColor, pieceOnSquare.position);
+          case 'rook':
+            return new Rook(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
+          case 'pawn':
+            return new Pawn(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
+          default:
+            return null;
+        }
+      }
+
+      // state emited from server is json format, have to convert into chess piece object
+      _.forEach(chessBoard, (square) => {
+        if (square.occupied) {
+          square.pieceOnSquare = convertToChessPieceObj(square.pieceOnSquare);
+        }
+      })
+      lastMovedPiece = convertToChessPieceObj(lastMovedPiece);
+
+      // console.log('emit board', chessBoard);
       let propChessStateStringify = JSON.stringify(this.props.chessBoard);
-      let emitChessStateStringify = JSON.stringify(newStateFromEmit.chessBoard);
+      let emitChessStateStringify = JSON.stringify(chessBoard);
       let propLastMovedPieceStringify = JSON.stringify(this.props.lastMovedPiece);
       let emitLastMovedPieceStringify = JSON.stringify(lastMovedPiece);
-      
+
+      // console.log('chessboard same', propChessStateStringify == emitChessStateStringify);
+      // console.log('turn same', turn == this.props.turn);
+      // console.log('start position same', lastMovedPieceStartPosition == this.props.lastMovedPieceStartPosition);
+      // console.log('end position same', lastMovedPieceEndPosition == this.props.lastMovedPieceEndPosition);
+      // // console.log(`emit end ${last}`)
+      // console.log('last moved same', lastMovedPiece == this.props.lastMovedPiece);
+      // console.log('----------------------------------')
+      let boardEqual = propChessStateStringify == emitChessStateStringify;
+      let turnEqual = turn == this.props.turn;
+      let startEqual = lastMovedPieceStartPosition == this.props.lastMovedPieceStartPosition;
+      let endEqual = lastMovedPieceEndPosition == this.props.lastMovedPieceEndPosition;
+      let lastMovedEqual = propLastMovedPieceStringify == emitLastMovedPieceStringify;
+
       //check if state already matches emitted state, if not matching, update state
-      if (propChessStateStringify !== emitChessStateStringify && turn !== this.props.turn && lastMovedPieceStartPosition !== this.props.lastMovedPieceStartPosition && lastMovedPieceEndPosition !== this.props.lastMovedPieceEndPosition && propLastMovedPieceStringify !== emitLastMovedPieceStringify){
-        //function to convert chess board pieces on board into chess piece objects
-        function convertToChessPieceObj(pieceOnSquare){
-          if(!pieceOnSquare){
-            return null;
-          }
-          switch(pieceOnSquare.pieceName){
-            case 'king':
-              return new King(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
-            case 'queen':
-              return new Queen(pieceOnSquare.pieceColor, pieceOnSquare.position);
-            case 'bishop':
-              return new Bishop(pieceOnSquare.pieceColor, pieceOnSquare.position);
-            case 'knight':
-              return new Knight(pieceOnSquare.pieceColor, pieceOnSquare.position);
-            case 'rook':
-              return new Rook(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
-            case 'pawn':
-              return new Pawn(pieceOnSquare.pieceColor, pieceOnSquare.position, pieceOnSquare.moved);
-            default:
-              return null;
-          }
-        }
-        
-        // state emited from server is json format, have to convert into chess piece object
-        _.forEach(chessBoard, (square)=>{
-          if(square.occupied){
-            square.pieceOnSquare = convertToChessPieceObj(square.pieceOnSquare);
-          }
-        })
-        lastMovedPiece = convertToChessPieceObj(lastMovedPiece);
-        
+      if (propChessStateStringify !== emitChessStateStringify && turn !== this.props.turn && lastMovedPieceStartPosition !== this.props.lastMovedPieceStartPosition && propLastMovedPieceStringify !== emitLastMovedPieceStringify){
+      // if (turn !== this.props.turn){
         this.props.emitNewBoardState(chessBoard);
-        this.props.emitNewTurn(turn);
         this.props.emitNewStartPosition(lastMovedPieceStartPosition);
-        this.props.emitNewEndPosition(lastMovedPieceEndPosition);
         this.props.emitLastMovedPiece(lastMovedPiece);
+        this.props.emitNewTurn(turn);
+        this.props.emitNewEndPosition(lastMovedPieceEndPosition);
       }
     })
 

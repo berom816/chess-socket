@@ -41,7 +41,7 @@ class MoveSetSquare extends Component {
   }
 
   render() {
-    console.log('happen moveset')
+    // console.log('happen moveset')
     return (
       <div className='move-set-square' onClick={this.handleClick}>
         {this.props.chessPiece ? this.props.chessPiece.pieceName : ''}

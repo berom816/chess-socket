@@ -25,7 +25,7 @@ class ChessBoard extends Component{
             } else if (this.props.selectedPiece !== null && position === this.props.selectedPiece.position){
               squareTypeComponent = <SelectedPieceSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
             } else if (this.props.lastMovedPieceEndPosition === position){
-              squareTypeComponent = <LastMovedEndSquare chessPiece={this.props.chessBoard[position].pieceOnSquare} />;
+              squareTypeComponent = <LastMovedEndSquare boardSquare={this.props.chessBoard[position]}/>;
             } else if (this.props.lastMovedPieceStartPosition === position){
               squareTypeComponent = <LastMovedStartSquare />
             } else if (this.props.chessBoard[position].occupied){
